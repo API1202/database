@@ -1,0 +1,20 @@
+Region,Country,ItemType,SalesChannel,OrderPriority,OrderDate,SalesID
+Sub-Saharan Africa,Namibia,Household,Offline,M,8/31/2015,1
+Europe,Iceland,Baby Food,Online,H,11/20/2010,2
+Europe,Russia,Meat,Online,L,6/22/2017,3
+Europe,Moldova,Meat,Online,L,2/28/2012,4
+Europe,Malta,Cereal,Online,M,8/12/2010,5
+Asia,Indonesia,Meat,Online,H,8/20/2010,6
+Sub-Saharan Africa,Djibouti,Household,Online,M,2/3/2011,7
+Europe,Greece,Household,Online,L,9/11/2015,8
+Sub-Saharan Africa,Cameroon,Cosmetics,Offline,M,1/31/2014,9
+Sub-Saharan Africa,Nigeria,Cosmetics,Online,C,11/21/2015,10
+Sub-Saharan Africa,Senegal,Fruits,Offline,M,8/29/2016,11
+Middle East and North Africa,Afghanistan,Cosmetics,Offline,L,10/21/2016,12
+Asia,India,Vegetables,Online,C,3/21/2010,13
+Middle East and North Africa,Lebanon,Vegetables,Online,L,10/15/2010,14
+Middle East and North Africa,Turkey,Office Supplies,Online,L,10/4/2010,15
+Middle East and North Africa,Iraq,Cosmetics,Offline,M,10/14/2014,16
+Sub-Saharan Africa,Rwanda,Personal Care,Offline,M,6/15/2013,17
+Europe,Ukraine,Baby Food,Offline,M,5/7/2017,18
+Europe,Finland,Office Supplies,Online,H,5/21/2015,19

@@ -1,0 +1,90 @@
+[
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Namibia",
+    "ItemType": "Household",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "8/31/2015"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Iceland",
+    "ItemType": "Baby Food",
+    "SalesChannel": "Online",
+    "OrderPriority": "H",
+    "OrderDate": "11/20/2010"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Russia",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "6/22/2017"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Moldova",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "2/28/2012"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Malta",
+    "ItemType": "Cereal",
+    "SalesChannel": "Online",
+    "OrderPriority": "M",
+    "OrderDate": "8/12/2010"
+  },
+  {
+    "Region": "Asia",
+    "Country": "Indonesia",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "H",
+    "OrderDate": "8/20/2010"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Djibouti",
+    "ItemType": "Household",
+    "SalesChannel": "Online",
+    "OrderPriority": "M",
+    "OrderDate": "2/3/2011"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Greece",
+    "ItemType": "Household",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "9/11/2015"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Cameroon",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "1/31/2014"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Nigeria",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Online",
+    "OrderPriority": "C",
+    "OrderDate": "11/21/2015"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Senegal",
+    "ItemType": "Fruits",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "8/29/2016"
+  }
+]

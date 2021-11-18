@@ -1,0 +1,173 @@
+[
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Namibia",
+    "ItemType": "Household",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "8/31/2015",
+    "SalesID": "1"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Iceland",
+    "ItemType": "Baby Food",
+    "SalesChannel": "Online",
+    "OrderPriority": "H",
+    "OrderDate": "11/20/2010",
+    "SalesID": "2"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Russia",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "6/22/2017",
+    "SalesID": "3"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Moldova",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "2/28/2012",
+    "SalesID": "4"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Malta",
+    "ItemType": "Cereal",
+    "SalesChannel": "Online",
+    "OrderPriority": "M",
+    "OrderDate": "8/12/2010",
+    "SalesID": "5"
+  },
+  {
+    "Region": "Asia",
+    "Country": "Indonesia",
+    "ItemType": "Meat",
+    "SalesChannel": "Online",
+    "OrderPriority": "H",
+    "OrderDate": "8/20/2010",
+    "SalesID": "6"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Djibouti",
+    "ItemType": "Household",
+    "SalesChannel": "Online",
+    "OrderPriority": "M",
+    "OrderDate": "2/3/2011",
+    "SalesID": "7"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Greece",
+    "ItemType": "Household",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "9/11/2015",
+    "SalesID": "8"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Cameroon",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "1/31/2014",
+    "SalesID": "9"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Nigeria",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Online",
+    "OrderPriority": "C",
+    "OrderDate": "11/21/2015",
+    "SalesID": "10"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Senegal",
+    "ItemType": "Fruits",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "8/29/2016",
+    "SalesID": "11"
+  },
+  {
+    "Region": "Middle East and North Africa",
+    "Country": "Afghanistan",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Offline",
+    "OrderPriority": "L",
+    "OrderDate": "10/21/2016",
+    "SalesID": "12"
+  },
+  {
+    "Region": "Asia",
+    "Country": "India",
+    "ItemType": "Vegetables",
+    "SalesChannel": "Online",
+    "OrderPriority": "C",
+    "OrderDate": "3/21/2010",
+    "SalesID": "13"
+  },
+  {
+    "Region": "Middle East and North Africa",
+    "Country": "Lebanon",
+    "ItemType": "Vegetables",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "10/15/2010",
+    "SalesID": "14"
+  },
+  {
+    "Region": "Middle East and North Africa",
+    "Country": "Turkey",
+    "ItemType": "Office Supplies",
+    "SalesChannel": "Online",
+    "OrderPriority": "L",
+    "OrderDate": "10/4/2010",
+    "SalesID": "15"
+  },
+  {
+    "Region": "Middle East and North Africa",
+    "Country": "Iraq",
+    "ItemType": "Cosmetics",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "10/14/2014",
+    "SalesID": "16"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Rwanda",
+    "ItemType": "Personal Care",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "6/15/2013",
+    "SalesID": "17"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Ukraine",
+    "ItemType": "Baby Food",
+    "SalesChannel": "Offline",
+    "OrderPriority": "M",
+    "OrderDate": "5/7/2017",
+    "SalesID": "18"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Finland",
+    "ItemType": "Office Supplies",
+    "SalesChannel": "Online",
+    "OrderPriority": "H",
+    "OrderDate": "5/21/2015",
+    "SalesID": "19"
+  }
+]

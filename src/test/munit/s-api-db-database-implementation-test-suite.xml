@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="s-api-db-database-implementation-test-suite.xml" />
+	<munit:test name="s-api-db-database-implementation-test-suite-system-call-databaseTest" doc:id="7d04fba8-6ced-432b-8749-b3b3da4da8ae" description="Test">
+		<munit:behavior>
+			<munit-tools:mock-when doc:name="Mock when" doc:id="56470e4f-befc-4cbd-9713-bd62425a3af0" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Fetch InputData" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="c3e19c0e-e87c-45fa-90e3-7e82bdb6530c" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='#[%dw 2.0&#10;output application/java &#10;---&#10; [&#10;  {&#10;    Country: "Namibia",&#10;    ItemType: "Household",&#10;    SalesID: "1",&#10;    SalesChannel: "Offline",&#10;    Region: "Sub-Saharan Africa",&#10;    OrderDate: "8/31/2015",&#10;    OrderPriority: "M"&#10;  }, &#10;  {&#10;    Country: "Nigeria",&#10;    ItemType: "Cosmetics",&#10;    SalesID: "10",&#10;    SalesChannel: "Online",&#10;    Region: "Sub-Saharan Africa",&#10;    OrderDate: "11/21/2015",&#10;    OrderPriority: "C"&#10;  }, &#10;  {&#10;    Country: "Taiwan",&#10;    ItemType: "Baby Food",&#10;    SalesID: "100",&#10;    SalesChannel: "Offline",&#10;    Region: "Asia",&#10;    OrderDate: "1/16/2013",&#10;    OrderPriority: "H"&#10;  }]&#10;]' mediaType="application/java" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to system-call-database" doc:id="575155d3-dcaf-4501-bfb3-38004ade8192" name="system-call-database"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="fcc9bbc1-5ef7-4c1e-a33e-7dce38652d33" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-api-db-database-implementation-test-suite-system-call-database-error" doc:id="fce7a0fe-7d0f-418a-8c43-7bfbe0c03402" description="Test" expectedErrorType="MULE:UNKNOWN">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock when" doc:id="2850294f-1684-4258-a8e7-a3217e45a574" processor="db:select">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="Fetch InputData" attributeName="doc:name" />
+						<munit-tools:with-attribute whereValue="c3e19c0e-e87c-45fa-90e3-7e82bdb6530c" attributeName="doc:id" />
+						<munit-tools:with-attribute whereValue="Database_Config" attributeName="config-ref" />
+					</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CONNECTIVTY" />
+				</munit-tools:then-return>
+				</munit-tools:mock-when>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to system-call-database" doc:id="28e54b3a-8781-4793-a34d-af98208cfa2d" name="system-call-database" />
+			</munit:execution>
+		</munit:test>
+
+
+</mule>

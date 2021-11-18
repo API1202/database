@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd">
+	<sub-flow name="s-api-db-database-errorSub_Flow" doc:id="63a9bfc0-0a57-4413-b585-f4a5deda1dd5" >
+		<ee:transform doc:name="Transform Message" doc:id="113eba46-ebf9-40df-86cb-9a6f32ee1a71" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+error.detailedDescription]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ftp:write doc:name="Write" doc:id="71fa697d-c88c-493b-964c-92b82b26137f" path="system-api-database-error.txt" config-ref="FTP_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1f648ff2-8681-491b-880e-7cf8b9a4784e" message="#[error.description]"/>
+	</sub-flow>
+</mule>

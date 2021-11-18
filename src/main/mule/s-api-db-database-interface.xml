@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
+    <apikit:config name="system-database-config" api="system-database.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <flow name="system-database-main">
+        <http:listener config-ref="HTTP_Listener_config" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[vars.httpDescription]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="system-database-config" />
+        <error-handler>
+            <on-error-propagate type="APIKIT:BAD_REQUEST">
+				<set-variable value="#[400]" doc:name="httpStatus" doc:id="f1abfd59-f58e-4994-9906-c0a3d210c82e" variableName="httpStatus"/>
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="35baca36-46e6-4d6a-8978-a8dbf5406314" variableName="httpDescription"/>
+				<flow-ref doc:name="Flow Reference" doc:id="c5fab40c-9173-4b4c-abc3-c563dfd417a0" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_FOUND">
+				<set-variable value="#[404]" doc:name="httpStatus" doc:id="6a80254b-3b01-4e1e-8b80-4a8421af999d" variableName="httpStatus" />
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="282c5d75-de58-448f-935c-760e111bed9c" variableName="httpDescription" />
+				<flow-ref doc:name="Flow Reference" doc:id="6be0ac75-51f6-4f7f-81ab-298397ee9632" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:METHOD_NOT_ALLOWED">
+				<set-variable value="#[405]" doc:name="httpStatus" doc:id="79538729-dfea-423e-91df-3c21a5f953b7" variableName="httpStatus"/>
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="56c6b184-31b9-4ee6-a77c-58881e7a6503" variableName="httpDescription"/>
+				<flow-ref doc:name="Flow Reference" doc:id="50d9d72d-a703-46db-aca7-f37199adbc8c" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_ACCEPTABLE">
+				<set-variable value="#[406]" doc:name="httpStatus" doc:id="8ab00327-342a-4d9c-a8a4-63ff2b81caee" variableName="httpStatus" />
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="dc6b0c7b-9212-475e-abb6-10763d4f9241" variableName="httpDescription" />
+				<flow-ref doc:name="Flow Reference" doc:id="2d5b8f2f-98be-42b0-8228-ab95ba4781b9" name="system-call-database" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+				<set-variable value="#[415]" doc:name="httpStatus" doc:id="10970f99-4c68-447c-9cd2-a98dc26cfaba" variableName="httpStatus" />
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="bf63bb8d-9a04-44a4-bea1-fbffb55754b6" variableName="httpDescription" />
+				<flow-ref doc:name="Flow Reference" doc:id="2243a191-3aeb-435b-b7fd-ac9b34716d8b" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
+				<set-variable value="#[415]" doc:name="httpStatus" doc:id="94f1c3f6-e532-4260-aa93-876d23933cb5" variableName="httpStatus" />
+				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="2cbabc05-669b-4d2c-9658-8a2f510b8741" variableName="httpDescription" />
+				<flow-ref doc:name="Flow Reference" doc:id="0bf64fd2-96a6-4090-8c55-0aeccc588585" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+            </on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="a51a826e-e265-4106-bd35-fc6f577c8932" type="ANY">
+				<set-variable value="#[vars.httpStatus]" doc:name="httpStatus" doc:id="6ec16354-9836-4d52-a617-82e8fc1a0283" variableName="httpStatus"/>
+				<set-variable value="#[vars.httpDescription]" doc:name="httpDescription" doc:id="837868e1-fd65-44b8-99de-654cbdfc61aa" variableName="httpDescription"/>
+				<flow-ref doc:name="Flow Reference" doc:id="34138cb9-d732-48e7-9423-2f022f75f37a" name="s-api-db-database-errorSub_Flow" targetValue="#[error.detailedDescription]"/>
+			</on-error-propagate>
+        </error-handler>
+    </flow>
+    <flow name="get:\database:system-database-config">
+		<flow-ref doc:name="Flow Reference" doc:id="fa77ebfe-3bf0-4559-bf2a-54080bc03057" name="system-call-database"/>
+    </flow>
+</mule>

@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Inputdata" format="csv">
+      <types:shape format="weave" example="examples/Order-Small.CSV"><![CDATA[%dw 2.0
+
+type Inputdata = Array<{|  SNo: String,   OrderID: String,   SKU: String,   Qty: String,   Price: String,   CustomerID: String|}> {"isQuotedString": "false",
+"header": "true",
+"headerLineNumber": "0"}
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+      </types:properties>
+    </types:type>
+    <types:type name="Outputdata" format="json">
+      <types:shape format="weave" example="examples/new 2.json"><![CDATA[%dw 2.0
+
+type Outputdata = Array<{|  SNo: String,   OrderID: String,   SKU: String,   Qty: String,   Price: String,   CustomerID: String|}> {"example": "[{\\\"SNo\\\":\\\"1\\\",\\\"OrderID\\\":\\\"10000\\\",\\\"SKU\\\":\\\"1512345\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"2\\\",\\\"OrderID\\\":\\\"10000\\\",\\\"SKU\\\":\\\"1512346\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"3\\\",\\\"OrderID\\\":\\\"10000\\\",\\\"SKU\\\":\\\"1512347\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"4\\\",\\\"OrderID\\\":\\\"10000\\\",\\\"SKU\\\":\\\"1512348\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"5\\\",\\\"OrderID\\\":\\\"10000\\\",\\\"SKU\\\":\\\"1512349\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"6\\\",\\\"OrderID\\\":\\\"10005\\\",\\\"SKU\\\":\\\"1512350\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"7\\\",\\\"OrderID\\\":\\\"10005\\\",\\\"SKU\\\":\\\"1512351\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"8\\\",\\\"OrderID\\\":\\\"10005\\\",\\\"SKU\\\":\\\"1512352\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"9\\\",\\\"OrderID\\\":\\\"10005\\\",\\\"SKU\\\":\\\"1512353\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"10\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512354\\\",\\\"Qty\\\":\\\"USA\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"11\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512355\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"12\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512356\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"13\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512357\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"14\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512358\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"15\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512359\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"16\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512360\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"17\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512361\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"18\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512362\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"19\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512363\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"20\\\",\\\"OrderID\\\":\\\"10009\\\",\\\"SKU\\\":\\\"1512364\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"21\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512365\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"22\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512366\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"23\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512367\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"24\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512368\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"25\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512369\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"26\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512370\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"27\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512371\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"28\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512372\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"29\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512373\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"30\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512374\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"31\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512375\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"32\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512376\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"33\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512377\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"34\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512378\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"35\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512379\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"36\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512380\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"37\\\",\\\"OrderID\\\":\\\"10020\\\",\\\"SKU\\\":\\\"1512381\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"38\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512382\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"39\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512383\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"40\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512384\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"41\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512385\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"42\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512386\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"43\\\",\\\"OrderID\\\":\\\"10037\\\",\\\"SKU\\\":\\\"1512387\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"44\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512388\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"45\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512389\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"46\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512390\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"47\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512391\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"48\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512392\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"49\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512393\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"50\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512394\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"51\\\",\\\"OrderID\\\":\\\"10043\\\",\\\"SKU\\\":\\\"1512395\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"52\\\",\\\"OrderID\\\":\\\"10051\\\",\\\"SKU\\\":\\\"1512396\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"53\\\",\\\"OrderID\\\":\\\"10051\\\",\\\"SKU\\\":\\\"1512397\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"54\\\",\\\"OrderID\\\":\\\"10051\\\",\\\"SKU\\\":\\\"1512398\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"55\\\",\\\"OrderID\\\":\\\"10051\\\",\\\"SKU\\\":\\\"1512399\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"56\\\",\\\"OrderID\\\":\\\"10051\\\",\\\"SKU\\\":\\\"1512400\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"57\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512401\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"58\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512402\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"59\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512403\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"60\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512404\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"61\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512405\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"62\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512406\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"63\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512407\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"64\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512408\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"65\\\",\\\"OrderID\\\":\\\"10056\\\",\\\"SKU\\\":\\\"1512409\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"66\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512410\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"67\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512411\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"68\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512412\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"69\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512413\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"70\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512414\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"71\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512415\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"72\\\",\\\"OrderID\\\":\\\"10065\\\",\\\"SKU\\\":\\\"1512416\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"73\\\",\\\"OrderID\\\":\\\"10072\\\",\\\"SKU\\\":\\\"1512417\\\",\\\"Qty\\\":\\\"3\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"74\\\",\\\"OrderID\\\":\\\"10072\\\",\\\"SKU\\\":\\\"1512418\\\",\\\"Qty\\\":\\\"4\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"75\\\",\\\"OrderID\\\":\\\"10072\\\",\\\"SKU\\\":\\\"1512419\\\",\\\"Qty\\\":\\\"5\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"76\\\",\\\"OrderID\\\":\\\"10072\\\",\\\"SKU\\\":\\\"1512420\\\",\\\"Qty\\\":\\\"1\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"},{\\\"SNo\\\":\\\"77\\\",\\\"OrderID\\\":\\\"10076\\\",\\\"SKU\\\":\\\"1512421\\\",\\\"Qty\\\":\\\"2\\\",\\\"Price\\\":\\\"14.5\\\",\\\"CustomerID\\\":\\\"3232323232\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="acutal_input" format="csv">
+      <types:shape format="weave" example="examples/Actualsmall.csv"><![CDATA[%dw 2.0
+
+type acutal_input = Array<{|  Region: String,   Country: String,   ItemType: String,   SalesChannel: String,   OrderPriority: String,   OrderDate: String,   SalesID: String|}> {"isQuotedString": "false",
+"header": "true",
+"headerLineNumber": "0"}
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+      </types:properties>
+    </types:type>
+    <types:type name="actual_output" format="json">
+      <types:shape format="weave" example="examples/actualsmall.json"><![CDATA[%dw 2.0
+
+type actual_output = Array<{|  Region: String,   Country: String,   ItemType: String,   SalesChannel: String,   OrderPriority: String,   OrderDate: String,   SalesID: String|}> {"example": "[{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Namibia\\\",\\\"ItemType\\\":\\\"Household\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"8\\/31\\/2015\\\",\\\"SalesID\\\":\\\"1\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Iceland\\\",\\\"ItemType\\\":\\\"Baby Food\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"H\\\",\\\"OrderDate\\\":\\\"11\\/20\\/2010\\\",\\\"SalesID\\\":\\\"2\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Russia\\\",\\\"ItemType\\\":\\\"Meat\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"6\\/22\\/2017\\\",\\\"SalesID\\\":\\\"3\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Moldova\\\",\\\"ItemType\\\":\\\"Meat\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"2\\/28\\/2012\\\",\\\"SalesID\\\":\\\"4\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Malta\\\",\\\"ItemType\\\":\\\"Cereal\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"8\\/12\\/2010\\\",\\\"SalesID\\\":\\\"5\\\"},{\\\"Region\\\":\\\"Asia\\\",\\\"Country\\\":\\\"Indonesia\\\",\\\"ItemType\\\":\\\"Meat\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"H\\\",\\\"OrderDate\\\":\\\"8\\/20\\/2010\\\",\\\"SalesID\\\":\\\"6\\\"},{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Djibouti\\\",\\\"ItemType\\\":\\\"Household\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"2\\/3\\/2011\\\",\\\"SalesID\\\":\\\"7\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Greece\\\",\\\"ItemType\\\":\\\"Household\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"9\\/11\\/2015\\\",\\\"SalesID\\\":\\\"8\\\"},{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Cameroon\\\",\\\"ItemType\\\":\\\"Cosmetics\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"1\\/31\\/2014\\\",\\\"SalesID\\\":\\\"9\\\"},{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Nigeria\\\",\\\"ItemType\\\":\\\"Cosmetics\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"C\\\",\\\"OrderDate\\\":\\\"11\\/21\\/2015\\\",\\\"SalesID\\\":\\\"10\\\"},{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Senegal\\\",\\\"ItemType\\\":\\\"Fruits\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"8\\/29\\/2016\\\",\\\"SalesID\\\":\\\"11\\\"},{\\\"Region\\\":\\\"Middle East and North Africa\\\",\\\"Country\\\":\\\"Afghanistan\\\",\\\"ItemType\\\":\\\"Cosmetics\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"10\\/21\\/2016\\\",\\\"SalesID\\\":\\\"12\\\"},{\\\"Region\\\":\\\"Asia\\\",\\\"Country\\\":\\\"India\\\",\\\"ItemType\\\":\\\"Vegetables\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"C\\\",\\\"OrderDate\\\":\\\"3\\/21\\/2010\\\",\\\"SalesID\\\":\\\"13\\\"},{\\\"Region\\\":\\\"Middle East and North Africa\\\",\\\"Country\\\":\\\"Lebanon\\\",\\\"ItemType\\\":\\\"Vegetables\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"10\\/15\\/2010\\\",\\\"SalesID\\\":\\\"14\\\"},{\\\"Region\\\":\\\"Middle East and North Africa\\\",\\\"Country\\\":\\\"Turkey\\\",\\\"ItemType\\\":\\\"Office Supplies\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"L\\\",\\\"OrderDate\\\":\\\"10\\/4\\/2010\\\",\\\"SalesID\\\":\\\"15\\\"},{\\\"Region\\\":\\\"Middle East and North Africa\\\",\\\"Country\\\":\\\"Iraq\\\",\\\"ItemType\\\":\\\"Cosmetics\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"10\\/14\\/2014\\\",\\\"SalesID\\\":\\\"16\\\"},{\\\"Region\\\":\\\"Sub-Saharan Africa\\\",\\\"Country\\\":\\\"Rwanda\\\",\\\"ItemType\\\":\\\"Personal Care\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"6\\/15\\/2013\\\",\\\"SalesID\\\":\\\"17\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Ukraine\\\",\\\"ItemType\\\":\\\"Baby Food\\\",\\\"SalesChannel\\\":\\\"Offline\\\",\\\"OrderPriority\\\":\\\"M\\\",\\\"OrderDate\\\":\\\"5\\/7\\/2017\\\",\\\"SalesID\\\":\\\"18\\\"},{\\\"Region\\\":\\\"Europe\\\",\\\"Country\\\":\\\"Finland\\\",\\\"ItemType\\\":\\\"Office Supplies\\\",\\\"SalesChannel\\\":\\\"Online\\\",\\\"OrderPriority\\\":\\\"H\\\",\\\"OrderDate\\\":\\\"5\\/21\\/2015\\\",\\\"SalesID\\\":\\\"19\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Payload" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Input-Payload.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Input_Payload = Any
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Attributes" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Input-Attributes.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Input_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {|  |}, 
+  version: String, 
+  localAddress: String
+|}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Variables-outboundHeaders" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Input-Variables-outboundHeaders.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Input_Variables_outboundHeaders = {|  |}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Variables-httpStatus" format="java">
+      <types:shape format="raml" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Payload" format="json">
+      <types:shape format="weave" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Output_Payload = {| "output"?: String |} {"example": "{\\\"output\\\":\\\"Done\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Attributes" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Output-Attributes.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Output_Attributes = Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-errorDescription" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Output-Variables-errorDescription.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Output_Variables_errorDescription = String | Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-errorType" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Output-Variables-errorType.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Output_Variables_errorType = org_mule_runtime_api_message_ErrorType | Null
+type org_mule_runtime_api_message_ErrorType = {|
+  identifier?: String, 
+  namespace?: String, 
+  parentErrorType?: org_mule_runtime_api_message_ErrorType
+|} {"typeId": "org.mule.runtime.api.message.ErrorType"}
+
+
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-outboundHeaders" format="java">
+      <types:shape format="weave" example="weave/autogenerated/11da5265-a8a6-46cf-9e31-141d3357fab5/Output-Variables-outboundHeaders.wev" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[%dw 2.0
+
+type auto_11da5265_a8a6_46cf_9e31_141d3357fab5_Output_Variables_outboundHeaders = {|  |}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-httpStatus" format="java">
+      <types:shape format="raml" autogeneratedOrigin="fa77ebfe-3bf0-4559-bf2a-54080bc03057"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+    <types:type name="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Input-Variables-httpStatus" format="java">
+      <types:shape format="weave" example="weave/autogenerated/63a9bfc0-0a57-4413-b585-f4a5deda1dd5/Input-Variables-httpStatus.wev" autogeneratedOrigin="34138cb9-d732-48e7-9423-2f022f75f37a"><![CDATA[%dw 2.0
+
+type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Input_Variables_httpStatus = Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Input-Variables-httpDescription" format="java">
+      <types:shape format="weave" example="weave/autogenerated/63a9bfc0-0a57-4413-b585-f4a5deda1dd5/Input-Variables-httpDescription.wev" autogeneratedOrigin="34138cb9-d732-48e7-9423-2f022f75f37a"><![CDATA[%dw 2.0
+
+type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Input_Variables_httpDescription = Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Payload" format="json">
+      <types:shape format="weave" example="weave/autogenerated/63a9bfc0-0a57-4413-b585-f4a5deda1dd5/Output-Payload.wev" autogeneratedOrigin="34138cb9-d732-48e7-9423-2f022f75f37a"><![CDATA[%dw 2.0
+
+type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Output_Payload = String | Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Variables-httpStatus" format="java">
+      <types:shape format="weave" example="weave/autogenerated/63a9bfc0-0a57-4413-b585-f4a5deda1dd5/Output-Variables-httpStatus.wev" autogeneratedOrigin="34138cb9-d732-48e7-9423-2f022f75f37a"><![CDATA[%dw 2.0
+
+type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Output_Variables_httpStatus = Null
+
+]]></types:shape>
+    </types:type>
+    <types:type name="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Variables-httpDescription" format="java">
+      <types:shape format="weave" example="weave/autogenerated/63a9bfc0-0a57-4413-b585-f4a5deda1dd5/Output-Variables-httpDescription.wev" autogeneratedOrigin="34138cb9-d732-48e7-9423-2f022f75f37a"><![CDATA[%dw 2.0
+
+type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Output_Variables_httpDescription = Null
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#5ddd85e2-a0ff-4747-8a98-face403d16ff">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="Inputdata"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#dcb3ff4e-6d66-4fb5-9084-ca16afdcd692">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="Outputdata"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#0c3df129-e56c-4770-a070-b24e5416004c">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="acutal_input"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#30185a60-ba5b-460a-bbc0-edb29e13d759">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="acutal_input"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="actual_output"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#11da5265-a8a6-46cf-9e31-141d3357fab5">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Payload"/>
+          <types:attributes type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Attributes"/>
+        </types:message>
+        <types:variables>
+          <types:variable name="outboundHeaders" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Variables-outboundHeaders"/>
+          <types:variable name="httpStatus" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Input-Variables-httpStatus"/>
+        </types:variables>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Payload"/>
+          <types:attributes type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Attributes"/>
+        </types:message>
+        <types:variables>
+          <types:variable name="outboundHeaders" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-outboundHeaders"/>
+          <types:variable name="errorDescription" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-errorDescription"/>
+          <types:variable name="errorType" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-errorType"/>
+          <types:variable name="httpStatus" type="auto_11da5265-a8a6-46cf-9e31-141d3357fab5_Output-Variables-httpStatus"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#63a9bfc0-0a57-4413-b585-f4a5deda1dd5">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:variables>
+          <types:variable name="httpStatus" type="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Input-Variables-httpStatus"/>
+          <types:variable name="httpDescription" type="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Input-Variables-httpDescription"/>
+        </types:variables>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Payload"/>
+        </types:message>
+        <types:variables>
+          <types:variable name="httpStatus" type="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Variables-httpStatus"/>
+          <types:variable name="httpDescription" type="auto_63a9bfc0-0a57-4413-b585-f4a5deda1dd5_Output-Variables-httpDescription"/>
+        </types:variables>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

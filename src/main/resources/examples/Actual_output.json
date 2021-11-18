@@ -1,0 +1,106 @@
+[
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Namibia",
+    "Item Type": "Household",
+    "Sales Channel": "Offline",
+    "Order Priority": "M",
+    "Order Date": "8/31/2015"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Iceland",
+    "Item Type": "Baby Food",
+    "Sales Channel": "Online",
+    "Order Priority": "H",
+    "Order Date": "11/20/2010"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Russia",
+    "Item Type": "Meat",
+    "Sales Channel": "Online",
+    "Order Priority": "L",
+    "Order Date": "6/22/2017"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Moldova",
+    "Item Type": "Meat",
+    "Sales Channel": "Online",
+    "Order Priority": "L",
+    "Order Date": "2/28/2012"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Malta",
+    "Item Type": "Cereal",
+    "Sales Channel": "Online",
+    "Order Priority": "M",
+    "Order Date": "8/12/2010"
+  },
+  {
+    "Region": "Asia",
+    "Country": "Indonesia",
+    "Item Type": "Meat",
+    "Sales Channel": "Online",
+    "Order Priority": "H",
+    "Order Date": "8/20/2010"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Djibouti",
+    "Item Type": "Household",
+    "Sales Channel": "Online",
+    "Order Priority": "M",
+    "Order Date": "2/3/2011"
+  },
+  {
+    "Region": "Europe",
+    "Country": "Greece",
+    "Item Type": "Household",
+    "Sales Channel": "Online",
+    "Order Priority": "L",
+    "Order Date": "9/11/2015"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Cameroon",
+    "Item Type": "Cosmetics",
+    "Sales Channel": "Offline",
+    "Order Priority": "M",
+    "Order Date": "1/31/2014"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Nigeria",
+    "Item Type": "Cosmetics",
+    "Sales Channel": "Online",
+    "Order Priority": "C",
+    "Order Date": "11/21/2015"
+  },
+  {
+    "Region": "Sub-Saharan Africa",
+    "Country": "Senegal",
+    "Item Type": "Fruits",
+    "Sales Channel": "Offline",
+    "Order Priority": "M",
+    "Order Date": "8/29/2016"
+  },
+  {
+    "Region": "Middle East and North Africa",
+    "Country": "Afghanistan",
+    "Item Type": "Cosmetics",
+    "Sales Channel": "Offline",
+    "Order Priority": "L",
+    "Order Date": "10/21/2016"
+  },
+  {
+    "Region": "Asia",
+    "Country": "India",
+    "Item Type": "Vegetables",
+    "Sales Channel": "Online",
+    "Order Priority": "C",
+    "Order Date": "3/21/2010"
+  }
+]
