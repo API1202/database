@@ -58,11 +58,12 @@
 				<configuration>
 					<runCoverage>true</runCoverage>
 					<failBuild>true</failBuild>
-					<requiredApplicationCoverage>70</requiredApplicationCoverage>
+					<requiredApplicationCoverage>100</requiredApplicationCoverage>
 					<coverage>
 						<runCoverage>true</runCoverage>
 						<formats>
 							<format>html</format>
+							<format>console</format>
 						</formats>
 					</coverage>
 				</configuration>
