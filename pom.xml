@@ -58,7 +58,7 @@
 				<configuration>
 					<runCoverage>true</runCoverage>
 					<failBuild>true</failBuild>
-					<requiredApplicationCoverage>100</requiredApplicationCoverage>
+					<requiredApplicationCoverage>70</requiredApplicationCoverage>
 					<coverage>
 						<runCoverage>true</runCoverage>
 						<formats>
