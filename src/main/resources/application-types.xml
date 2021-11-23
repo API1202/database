@@ -187,15 +187,6 @@ type auto_63a9bfc0_0a57_4413_b585_f4a5deda1dd5_Output_Variables_httpDescription 
       </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
-  <types:enrichment select="#0c3df129-e56c-4770-a070-b24e5416004c">
-    <types:processor-declaration>
-      <types:output-event>
-        <types:message>
-          <types:payload type="acutal_input"/>
-        </types:message>
-      </types:output-event>
-    </types:processor-declaration>
-  </types:enrichment>
   <types:enrichment select="#30185a60-ba5b-460a-bbc0-edb29e13d759">
     <types:processor-declaration>
       <types:input-event>

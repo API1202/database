@@ -8,9 +8,12 @@
 		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 	<munit:config name="s-api-db-database-interface-test-suite.xml" />
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT_BADREQUEST" doc:id="a2e6b59e-6db0-43c7-b447-227b4dcad92b" description="Test" expectedErrorType="APIKIT:BAD_REQUEST">
+	<munit:test name="s-api-db-database-interface-test-suite-system-database-mainTest" doc:id="276d7086-e0a8-4c37-a366-f17c8c1479cf" description="Test" expectedErrorType="APIKIT:BAD_REQUEST">
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="s-api-db-database-errorSub_Flow" />
+		</munit:enable-flow-sources>
 		<munit:behavior >
-			<munit-tools:mock-when doc:name="APIKIT router" doc:id="5209af03-e09c-42f6-9114-b4b96bffafb0" processor="apikit:router">
+			<munit-tools:mock-when doc:name="Mock when apikit:router" doc:id="59fe9d0d-9293-4875-9c2e-be5738ff96a1" processor="apikit:router">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
 				</munit-tools:with-attributes>
@@ -18,189 +21,36 @@
 					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
 				</munit-tools:then-return>
 			</munit-tools:mock-when>
-			<munit-tools:mock-when doc:name="Mock when" doc:id="5fa81d14-564a-4ace-bbd2-8bee545c7e65" processor="flow-ref">
+			<munit-tools:mock-when doc:name="Mock when flow-ref" doc:id="bcf2972c-dab1-4987-bc48-c89faab7637a" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
 					<munit-tools:with-attribute whereValue="c5fab40c-9173-4b4c-abc3-c563dfd417a0" attributeName="doc:id" />
 					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
 				</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:payload value="#[payload]" />
-				</munit-tools:then-return>
 			</munit-tools:mock-when>
 		</munit:behavior>
 		<munit:execution >
-			<flow-ref doc:name="Flow-ref to system-database-main" doc:id="bef3b58d-282a-475e-96ab-eb0eaa49fb3f" name="system-database-main"/>
+			<flow-ref doc:name="Flow-ref to system-database-main" doc:id="93e84f55-ac66-4ef8-b9f6-8d0d771abbe7" name="system-database-main"/>
 		</munit:execution>
 	</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT:NOT_FOUND" doc:id="0d56c0d9-bef4-47df-9d9c-2c61480d717c" description="Test" expectedErrorType="APIKIT:NOT_FOUND">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="846b49ee-a03a-4ee3-94c4-cb3ddc04bd75" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="7b7a7ef2-0ad1-452a-ae6d-26faa068277f" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="6be0ac75-51f6-4f7f-81ab-298397ee9632" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="2a9393e5-ab2c-45de-b7b1-4d25e3f0f790" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT:METHOD_NOT_ALLOWED" doc:id="0d2ecb1c-f9b6-4561-a362-dd09785c1547" description="Test" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="f76e30b0-e184-4cc0-ac93-fc48d665c986" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="4d8303f5-4dde-4c77-9c91-ecc8a1fb0551" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="50d9d72d-a703-46db-aca7-f37199adbc8c" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="514cb64d-98b1-45f5-8069-74d5c5f03b0a" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT:NOT_ACCEPTABLE" doc:id="bb48e913-af11-402c-8e01-295623554f1f" description="Test" expectedErrorType="APIKIT:NOT_ACCEPTABLE">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="977dc027-429b-4c63-bf2f-948e301d790c" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="f01dcf4c-a7a5-48da-b369-96af3a58766b" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="2d5b8f2f-98be-42b0-8228-ab95ba4781b9" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="system-call-database" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="21d5a207-a894-4847-b9b5-612a80c8b181" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="a34b1765-33a4-4930-940a-6b030c870ba7" description="Test" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="a71a82c9-2715-4637-aea1-c57aea02067e" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="d001c9f4-f6d2-4e72-9d5f-666cd8b89ebd" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="2243a191-3aeb-435b-b7fd-ac9b34716d8b" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="da9a67e1-3e38-48b8-a92a-ef4ad34cdd22" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-APIKIT:NOT_IMPLEMENTED" doc:id="bbfd5192-e718-484e-af35-6070ea1aa78b" description="Test" expectedErrorType="APIKIT:NOT_IMPLEMENTED">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="4160edd0-02dd-4596-8c25-55ab63a7be69" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="a38f664f-e81b-48e3-9e5c-4c82ef9f1eb4" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="0bf64fd2-96a6-4090-8c55-0aeccc588585" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="99b07eee-3c02-4356-bb6f-500f52ee34b5" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-system-database-ANY" doc:id="b46dd525-5fbe-48c6-92db-6191f005e627" description="Test" expectedErrorType="MULE:UNKNOWN">
-			<munit:behavior>
-				<munit-tools:mock-when doc:name="APIKIT router" doc:id="1f1cc250-9f0d-4a28-a1b3-a0b701d47d02" processor="apikit:router">
-					<munit-tools:with-attributes>
-						<munit-tools:with-attribute whereValue="system-database-config" attributeName="config-ref" />
-					</munit-tools:with-attributes>
-				<munit-tools:then-return >
-					<munit-tools:error typeId="MULE:UNKNOWN" />
-				</munit-tools:then-return>
-				</munit-tools:mock-when>
-				<munit-tools:mock-when doc:name="Mock when" doc:id="0efdc310-e177-40dc-9bc6-84703d3e1a31" processor="flow-ref">
-					<munit-tools:with-attributes >
-					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
-					<munit-tools:with-attribute whereValue="34138cb9-d732-48e7-9423-2f022f75f37a" attributeName="doc:id" />
-					<munit-tools:with-attribute whereValue="s-api-db-database-errorSub_Flow" attributeName="name" />
-				</munit-tools:with-attributes>
-				<munit-tools:then-return>
-						<munit-tools:payload value="#[payload]" />
-					</munit-tools:then-return>
-				</munit-tools:mock-when>
-			</munit:behavior>
-			<munit:execution>
-				<flow-ref doc:name="Flow-ref to system-database-main" doc:id="c1546250-c646-4a10-9a8c-c35c8f201028" name="system-database-main" />
-			</munit:execution>
-		</munit:test>
-	<munit:test name="s-api-db-database-interface-test-suite-get:\database:system-database-configTest" doc:id="e9ed04ed-5dad-45f3-be9d-7b7ecb8abc3f" description="Test">
+	<munit:test name="s-api-db-database-interface-test-suite-get:\database:system-database-configTest" doc:id="ffc0c68a-f324-4d68-b9e4-27c9bbf4a6f9" description="Test">
 		<munit:behavior >
-			<munit-tools:mock-when doc:name="Mock when" doc:id="9b073ede-754c-4308-82f4-32b3c2f0f035" processor="flow-ref">
+			<munit-tools:mock-when doc:name="Mock when flow-ref" doc:id="dcbbe6bb-4819-4f85-a1cb-6fe1c4817e33" processor="flow-ref">
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute whereValue="Flow Reference" attributeName="doc:name" />
 					<munit-tools:with-attribute whereValue="fa77ebfe-3bf0-4559-bf2a-54080bc03057" attributeName="doc:id" />
 					<munit-tools:with-attribute whereValue="system-call-database" attributeName="name" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
-					<munit-tools:payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;[&#10;  {&#10;    "Country": "Namibia",&#10;    "ItemType": "Household",&#10;    "SalesID": "1",&#10;    "SalesChannel": "Offline",&#10;    "Region": "Sub-Saharan Africa",&#10;    "OrderDate": "8/31/2015",&#10;    "OrderPriority": "M"&#10;  },&#10;  {&#10;    "Country": "Nigeria",&#10;    "ItemType": "Cosmetics",&#10;    "SalesID": "10",&#10;    "SalesChannel": "Online",&#10;    "Region": "Sub-Saharan Africa",&#10;    "OrderDate": "11/21/2015",&#10;    "OrderPriority": "C"&#10;  }]&#10;]' mediaType="application/json" />
+					<munit-tools:payload value='#[%dw 2.0&#10;output application/json&#10;---&#10;[&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Namibia",&#10;    "ItemType": "Household",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "8/31/2015",&#10;    "SalesID": "1"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Iceland",&#10;    "ItemType": "Baby Food",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "H",&#10;    "OrderDate": "11/20/2010",&#10;    "SalesID": "2"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Russia",&#10;    "ItemType": "Meat",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "6/22/2017",&#10;    "SalesID": "3"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Moldova",&#10;    "ItemType": "Meat",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "2/28/2012",&#10;    "SalesID": "4"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Malta",&#10;    "ItemType": "Cereal",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "8/12/2010",&#10;    "SalesID": "5"&#10;  },&#10;  {&#10;    "Region": "Asia",&#10;    "Country": "Indonesia",&#10;    "ItemType": "Meat",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "H",&#10;    "OrderDate": "8/20/2010",&#10;    "SalesID": "6"&#10;  },&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Djibouti",&#10;    "ItemType": "Household",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "2/3/2011",&#10;    "SalesID": "7"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Greece",&#10;    "ItemType": "Household",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "9/11/2015",&#10;    "SalesID": "8"&#10;  },&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Cameroon",&#10;    "ItemType": "Cosmetics",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "1/31/2014",&#10;    "SalesID": "9"&#10;  },&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Nigeria",&#10;    "ItemType": "Cosmetics",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "C",&#10;    "OrderDate": "11/21/2015",&#10;    "SalesID": "10"&#10;  },&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Senegal",&#10;    "ItemType": "Fruits",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "8/29/2016",&#10;    "SalesID": "11"&#10;  },&#10;  {&#10;    "Region": "Middle East and North Africa",&#10;    "Country": "Afghanistan",&#10;    "ItemType": "Cosmetics",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "10/21/2016",&#10;    "SalesID": "12"&#10;  },&#10;  {&#10;    "Region": "Asia",&#10;    "Country": "India",&#10;    "ItemType": "Vegetables",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "C",&#10;    "OrderDate": "3/21/2010",&#10;    "SalesID": "13"&#10;  },&#10;  {&#10;    "Region": "Middle East and North Africa",&#10;    "Country": "Lebanon",&#10;    "ItemType": "Vegetables",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "10/15/2010",&#10;    "SalesID": "14"&#10;  },&#10;  {&#10;    "Region": "Middle East and North Africa",&#10;    "Country": "Turkey",&#10;    "ItemType": "Office Supplies",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "L",&#10;    "OrderDate": "10/4/2010",&#10;    "SalesID": "15"&#10;  },&#10;  {&#10;    "Region": "Middle East and North Africa",&#10;    "Country": "Iraq",&#10;    "ItemType": "Cosmetics",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "10/14/2014",&#10;    "SalesID": "16"&#10;  },&#10;  {&#10;    "Region": "Sub-Saharan Africa",&#10;    "Country": "Rwanda",&#10;    "ItemType": "Personal Care",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "6/15/2013",&#10;    "SalesID": "17"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Ukraine",&#10;    "ItemType": "Baby Food",&#10;    "SalesChannel": "Offline",&#10;    "OrderPriority": "M",&#10;    "OrderDate": "5/7/2017",&#10;    "SalesID": "18"&#10;  },&#10;  {&#10;    "Region": "Europe",&#10;    "Country": "Finland",&#10;    "ItemType": "Office Supplies",&#10;    "SalesChannel": "Online",&#10;    "OrderPriority": "H",&#10;    "OrderDate": "5/21/2015",&#10;    "SalesID": "19"&#10;  }&#10;]]' mediaType="application/json" />
 				</munit-tools:then-return>
 			</munit-tools:mock-when>
 		</munit:behavior>
 		<munit:execution >
-			<flow-ref doc:name="Flow-ref to get:\database:system-database-config" doc:id="29ffd07d-7ec1-4ec8-8187-72cff9a20d12" name="get:\database:system-database-config"/>
+			<flow-ref doc:name="Flow-ref to get:\database:system-database-config" doc:id="e8571988-8d79-4205-8cf0-22f76015211d" name="get:\database:system-database-config"/>
 		</munit:execution>
-		<munit:validation>
-			<munit-tools:assert-that doc:name="Assert that" doc:id="dbd40e89-1935-476e-b757-93f92430e2eb" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="359a3410-ef25-407d-a8fd-05fb0e1c659d" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
 		</munit:validation>
 	</munit:test>
 
