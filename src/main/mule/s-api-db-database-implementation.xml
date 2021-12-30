@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd
-http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
 	<flow name="Insert_Into_Database" doc:id="5c4d7fe4-22c8-4117-a552-f49e26848194" >
 		<file:listener doc:name="Fetch File" doc:id="0c3df129-e56c-4770-a070-b24e5416004c" directory="C:\\Users\\vigneshbr\\Desktop\\Usecase\\InputData" autoDelete="true" outputMimeType="application/csv">
 			<scheduling-strategy >
@@ -37,9 +38,11 @@ payload map ( payload01 , indexOfPayload01 ) -> {
 		<logger level="INFO" doc:name='"Done"' doc:id="451602f4-832a-4772-a981-66d7c3dc1b8a" message='#["Done"]'/>
 	</flow>
 	<flow name="system-call-database" doc:id="11da5265-a8a6-46cf-9e31-141d3357fab5" >
+		<json-logger:logger doc:name="Before fetching the data" doc:id="117bb72f-59cc-47ec-983f-08bda11756b1" config-ref="JSON_Logger_Config" message='#["Before fetching the data from the system database with correlationID:" ++ (vars.correlationID as String)]' tracePoint="FLOW" priority="DEBUG"/>
 		<db:select doc:name="Fetch InputData" doc:id="c3e19c0e-e87c-45fa-90e3-7e82bdb6530c" config-ref="Database_Config">
 			<db:sql ><![CDATA[select * from usecase.actual;]]></db:sql>
 		</db:select>
+		<json-logger:logger doc:name="After fetching the data" doc:id="ba58d9f4-8294-4b72-a8e3-be6471cea923" config-ref="JSON_Logger_Config" message='#["After fetching the data from the system database with correlationID:" ++ (vars.correlationID as String)]' tracePoint="FLOW" priority="DEBUG"/>
 		<ee:transform doc:name="Transform Message" doc:id="e4ab60f8-11b7-4cfa-a653-52f5b104d6a8" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0

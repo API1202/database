@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
     <apikit:config name="system-database-config" api="system-database.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
-    <flow name="system-database-main">
+	<flow name="system-database-main">
         <http:listener config-ref="HTTP_Listener_config" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
@@ -11,8 +14,20 @@
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="system-database-config" />
-        <error-handler>
+        <ee:transform doc:name="Transform Message" doc:id="5a6cbddc-2a84-45a0-85a3-fa2e2791d409" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="correlationID" ><![CDATA[%dw 2.0
+output application/java
+---
+correlationID:attributes.headers.correlationID]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<json-logger:logger doc:name="Start of the system-database-flow" doc:id="8f14edc5-1b72-460e-a324-5dacf96d1ab3" config-ref="JSON_Logger_Config" message='#["Start of the system-database-flow with correlationID:" ++ (vars.correlationID as String)]'/>
+		<apikit:router config-ref="system-database-config" />
+        <json-logger:logger doc:name="End of the system-database-flow" doc:id="e88fbe0b-dbc5-4fba-ab05-8b5e1e992e73" config-ref="JSON_Logger_Config" message='#["End of the system-database-flow with correlationID:" ++ (vars.correlationID as String)]' tracePoint="END"/>
+		<error-handler>
             <on-error-propagate type="APIKIT:BAD_REQUEST">
 				<set-variable value="#[400]" doc:name="httpStatus" doc:id="f1abfd59-f58e-4994-9906-c0a3d210c82e" variableName="httpStatus"/>
 				<set-variable value="#[error.detailedDescription]" doc:name="httpDescription" doc:id="35baca36-46e6-4d6a-8978-a8dbf5406314" variableName="httpDescription"/>
